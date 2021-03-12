@@ -3,6 +3,10 @@ package org.tecnificados.boot;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * @author Juan Carlos Ballesteros (tecnificados.com)
+ *
+ */
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
