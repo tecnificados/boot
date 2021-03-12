@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.tecnificados.boot.controller.StartController;
 
 
 /**
@@ -27,11 +28,16 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/login", "/resources/**").permitAll()
+				.antMatchers(StartController.DEFAULT,
+							 StartController.ADD,
+							 StartController.EMPTY,
+							"/login",
+							"/resources/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
