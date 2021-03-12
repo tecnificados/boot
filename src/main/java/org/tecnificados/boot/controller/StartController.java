@@ -5,6 +5,8 @@ package org.tecnificados.boot.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import org.tecnificados.boot.service.IncidenciaService;
 @Controller
 public class StartController {
 
+	Logger logger = LoggerFactory.getLogger(StartController.class);
+	
 	public static final String EMPTY = "/empty";
 	public static final String ADD = "/add";
 	public static final String DEFAULT = "/";
@@ -30,6 +34,8 @@ public class StartController {
 
 	@RequestMapping(DEFAULT)
 	public ModelAndView  index() {
+		
+		logger.info("index");		
 
 		List<Incidencia> list = personaService.getAll();
 		
@@ -46,6 +52,7 @@ public class StartController {
 	@ResponseBody
 	public String  add() {
 
+		logger.info("add");
 					
 		Long id=personaService.maxId()+1;
 		
@@ -67,6 +74,7 @@ public class StartController {
 	@ResponseBody
 	public String  empty() {
 
+		logger.info("empty");
 					
 		List<Incidencia> list = personaService.getAll();
 		
