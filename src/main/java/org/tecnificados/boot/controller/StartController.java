@@ -30,14 +30,14 @@ public class StartController {
 	
 	
 	@Autowired
-	private IncidenciaService personaService;
+	private IncidenciaService incidenciaService;
 
 	@RequestMapping(DEFAULT)
 	public ModelAndView  index() {
 		
 		logger.info("index");		
 
-		List<Incidencia> list = personaService.getAll();
+		List<Incidencia> list = incidenciaService.getAll();
 		
 		ModelAndView model = new ModelAndView();
 		model.addObject("list", list);
@@ -54,7 +54,7 @@ public class StartController {
 
 		logger.info("add");
 					
-		Long id=personaService.maxId()+1;
+		Long id=incidenciaService.maxId()+1;
 		
 		Incidencia incidencia = new Incidencia();
 		incidencia.setId(id);
@@ -63,7 +63,7 @@ public class StartController {
 		incidencia.setDescripcion("La aplicación no arranca");
 		incidencia.setEstado(0);		
 		
-		personaService.save(incidencia);
+		incidenciaService.save(incidencia);
 		
 
 		return "added";
@@ -76,11 +76,11 @@ public class StartController {
 
 		logger.info("empty");
 					
-		List<Incidencia> list = personaService.getAll();
+		List<Incidencia> list = incidenciaService.getAll();
 		
 		for (Incidencia p:list)
 		{
-			personaService.delete(p.getId());
+			incidenciaService.delete(p.getId());
 		}
 		
 		
