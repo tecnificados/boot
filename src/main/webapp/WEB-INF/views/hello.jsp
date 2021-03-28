@@ -15,11 +15,18 @@
 <title>Tecnificados - Página Inicial</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css"/>">
+	
+	<style>
+	#saludo_row
+	{
+		min-height:200px;
+	}
+	</style>
 
 </head>
 
 <body>Hola con Spring Boot
-<body>
+
 
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 		<a class="navbar-brand" href="#">Demo Spring Boot</a>
@@ -58,72 +65,25 @@
 		</div>
 		
 		<div class="container">
-		<c:choose>
-				<c:when test="${empty list}">
-					<div class="row">
-						<h4>No hay Incidencias</h4>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="row">
-						<h4>Incidencias</h4>
-					</div>
-
-					<c:forEach var="entidad" items="${list}" varStatus="loop">
-						<div class="row">
-							<div class="col-md-4">
-								<p>${entidad.titulo}</p>
-							</div>
-							<div class="col-md-4">
-								<p>${entidad.descripcion}</p>
-							</div>
-							<div class="col-md-4">
-								<p>${entidad.autor}</p>
-							</div>
-						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			</div>	
-			<hr>
-
-		<div class="container">
-			<!-- Example row of columns -->
-			<div class="row">
-				<div class="col-md-4">
-					<h2>Fase 1</h2>
-					<p>Recolección.</p>
-					<p>
-						<a class="btn btn-secondary" href="#" role="button">Más
-							&raquo;</a>
-					</p>
+		
+			<div class="row" id="saludo_row">
+				<div class="col-md-6">
+					<h4>Saludos ${pageContext.request.remoteUser}</h4>
 				</div>
-				<div class="col-md-4">
-					<h2>Fase 2</h2>
-					<p>...</p>
-					<p>
-						<a class="btn btn-secondary" href="#" role="button">Más
-							&raquo;</a>
-					</p>
-				</div>
-				<div class="col-md-4">
-					<h2>Fase 3</h2>
-					<p>Ganancias.</p>
-					<p>
-						<a class="btn btn-secondary" href="#" role="button">Más
-							&raquo;</a>
-					</p>
+				<div class="col-md-6">
+					<form action="<c:url value='/logout' />" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            			<input type="submit" value="Desconectar"/>
+        			</form>	
 				</div>
 			</div>
-
 		
-
-
 			
-
-	
-		<!-- /container -->
-
+				
+		</div>	
+		
+		
+		
 	</main>
 
 	<footer class="container">
