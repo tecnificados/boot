@@ -42,6 +42,11 @@
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="<c:url value="/incidencia/list"/>">Acceder
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</nav>
