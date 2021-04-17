@@ -9,9 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.tecnificados.boot.Constant;
 import org.tecnificados.boot.model.Incidencia;
 import org.tecnificados.boot.service.IncidenciaService;
 
@@ -20,12 +22,14 @@ import org.tecnificados.boot.service.IncidenciaService;
  *
  */
 @Controller
-public class IssueController {
+public class IncidenciaController {
 
-	Logger logger = LoggerFactory.getLogger(IssueController.class);
+	Logger logger = LoggerFactory.getLogger(IncidenciaController.class);
 	
 
 	public static final String LIST = "/incidencia/list";
+	public static final String ADD = "/incidencia/add";
+	public static final String SAVE = "/incidencia/save";
 	
 	
 	@Autowired
@@ -34,7 +38,7 @@ public class IssueController {
 	@RequestMapping(LIST)
 	public ModelAndView  list() {
 		
-		logger.info("index");		
+		logger.info(LIST);		
 
 		List<Incidencia> list = incidenciaService.getAll();
 		
@@ -45,6 +49,35 @@ public class IssueController {
 
 		return model;
 	}
+	
+	@RequestMapping(ADD)
+	public ModelAndView add() {
+		
+		logger.info(ADD);		
+		
+		ModelAndView model = new ModelAndView();
+		model.addObject("estados", Constant.estados);
+		
+		model.setViewName("incidencia/add");
+
+		return model;
+	}
+	
+	
+	@RequestMapping(SAVE)
+	public ModelAndView save(Incidencia incidencia ) {
+		
+		logger.info(SAVE);		
+		
+		Long id=incidenciaService.maxId()+1;
+		
+		incidencia.setId(id);
+		
+		incidenciaService.save(incidencia);
+
+		return list();
+	}
+	
 	
 	
 	

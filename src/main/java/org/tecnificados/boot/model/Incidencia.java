@@ -68,4 +68,15 @@ public class Incidencia {
 		this.autor = autor;
 	}
 
+	public Incidencia() {
+		super();
+		this.id = Long.valueOf(-1);
+		this.titulo = "";
+		this.descripcion = "";
+		this.estado = 0;
+		this.autor = "";
+	}
+	
+	
+
 }

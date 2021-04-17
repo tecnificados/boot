@@ -5,6 +5,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +57,7 @@
 				</li>
 				
 			</ul>			
-			 <form class="form-inline my-2 my-lg-0" action="<c:url value='/logout' />" method="post">	
+			 <form class="form-inline my-2 my-lg-0" action="<c:url value='/logout' />" method="post"  accept-charset="utf-8">	
 			 	<a class="nav-link">
 						${pageContext.request.remoteUser}
 					</a>
@@ -64,71 +68,49 @@
 	</nav>
 
 
+	<div class="container">
+		<h1 id="title">Nueva Incidencia</h1>
 		
-		<div class="container">
-		
+			<form class="issueForm" action="<c:url value='/incidencia/save' />" method="post">
+			
+				<div class="form-group">
+				    <label for="titulo">Título</label>
+				    <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="tituloHelp" placeholder="Escribe el título de la incidencia">
+				    <small id="tituloHelp" class="form-text text-muted">El contenido debe ser una descripción muy breve de la incidencia</small>
+				 </div>
 				
-		<h1 id="title">Incidencias</h1>
+				<div class="form-group">
+				    <label for="descripcion">Descripción</label>
+				    <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+				</div>
+				
+				<div class="form-group">
+				    <label for="estado">Estado</label>
+				    <select class="form-control" id="estado" name="estado">
+				    <c:forEach var="entry" items="${estados}">				
+					  <option value="${entry.key}"><c:out value="${entry.value}"/></option>
+					</c:forEach>     
+				      
+				    </select>
+				  </div>
+				  
+				 <div class="form-group">
+				    <label for="autor">Autor</label>
+				    <input type="text" class="form-control" id="autor" name="autor" placeholder="Escribe el nombre del usuario que envía la incidencia">
+				 </div>
+
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<button class="btn btn-secondary" type="submit">Guardar</button>
+			</form>
 		
-		<div class="row justify-content-end">	
-			
-				<a class="text-decoration-none" href="/incidencia/add">Nueva Incidencia</a>
-			
-		</div>
-		
-		<c:choose>
-				<c:when test="${empty list}">
-					<div class="row">
-						<h4>No hay Incidencias</h4>
-					</div>
-				</c:when>
-				<c:otherwise>	
-				<div class="row">				
-					<table class="table">
-					  <thead>
-					    <tr>
-					      <th scope="col">#</th>
-					      <th scope="col">Título</th>
-					      <th scope="col">Descripción</th>
-					      <th scope="col">Autor</th>
-					      <th scope="col">Operaciones</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					  <c:forEach var="entidad" items="${list}" varStatus="loop">
-						<tr>
-							<td>${loop.index+1}</td>
-							<td>${entidad.titulo}</td>
-							<td>${entidad.descripcion}</td>
-							<td>${entidad.autor}</td>
-							<td>
-								<a class="operationLink" href="/incidencia/record/${entidad.id}"><i class="fas fa-eye text-primary"></i></a>						
-								<a class="operationLink" href="/incidencia/edit/${entidad.id}"><i class="fas fa-edit text-primary"></i></a>	
-								<a class="operationLink" href="/incidencia/remove/${entidad.id}"><i class="fas fa-trash text-danger"></i></a>									
-							</td>												
-						</tr>
-					  </c:forEach>					    
-					  </tbody>
-					</table>
-					</div>
-					
-					
-					
-				</c:otherwise>
-			</c:choose>
-		
-		
-		</div>
-	
+	</div>
 
 
-
-
-<footer class="footer">
-  <div class="container text-right">
-    <span class="text-muted">&copy; Tecnificados 2021</span>
-  </div>
-</footer>
+	<footer class="footer">
+	  <div class="container text-right">
+	    <span class="text-muted">&copy; Tecnificados 2021</span>
+	  </div>
+	</footer>
 
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -140,7 +122,12 @@
 						.write('<script src="<c:url value="/resources/js/vendor/jquery.slim.min.js"/>"><\/script>')
 	</script>
 	<script src="<c:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
-
+	
+	<style>
+	.issueForm{
+		margin-bottom: 100px;
+	}
+	</style>
 
 </body>
 </html>

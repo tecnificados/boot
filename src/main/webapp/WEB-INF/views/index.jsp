@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -36,14 +35,9 @@
 					<a class="nav-link" href="<c:url value="/"/>">Inicio
 						<span class="sr-only">(current)</span>
 					</a>
-				</li>
+				</li>				
 				<li class="nav-item active">
-					<a class="nav-link" href="<c:url value="/hello"/>">Saludo
-						<span class="sr-only">(current)</span>
-					</a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" href="<c:url value="/incidencia/list"/>">Acceder
+					<a class="nav-link" href="<c:url value="/incidencia/list"/>">Incidencias
 						<span class="sr-only">(current)</span>
 					</a>
 				</li>
