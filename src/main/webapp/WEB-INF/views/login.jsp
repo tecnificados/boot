@@ -39,17 +39,18 @@
 	<form class="form-signin" action="<c:url value='/login' />" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<img class="mb-4" src="<c:url value="/resources/img/logo.png"/>" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Por favor entra</h1>
+		<h1 class="h3 mb-3 font-weight-normal">Gestión de Incidencias</h1>
 		<label for="username" class="sr-only">Usuario</label>
 		<input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required autofocus> 
 		<label for="password" class="sr-only">Password</label>
 		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
 		
 		
-		
+		<!-- 
 		<div class="checkbox mb-3">
 			<label> <input type="checkbox" value="remember-me">Recuérdame</label>
 		</div>
+		 -->
 		<c:if test = "${param.error != null}">
        		<div class="alert alert-danger" role="alert">
 			 Usuario y Password no validos.

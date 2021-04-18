@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.tecnificados.boot.controller.IncidenciaController;
 import org.tecnificados.boot.controller.StartController;
 
 
@@ -34,14 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers(StartController.DEFAULT,
-							 StartController.ADD,
-							 StartController.EMPTY,
 							"/login",
 							"/resources/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
+				.defaultSuccessUrl(IncidenciaController.LIST, true)
 				.permitAll()
 				.and()
 			.logout()
