@@ -30,6 +30,9 @@ public class IncidenciaController {
 	public static final String ADD = "/incidencia/add";
 	public static final String SAVE = "/incidencia/save";
 	public static final String REMOVE = "/incidencia/remove"+"/{id}";
+	public static final String VIEW = "/incidencia/view"+"/{id}";
+	public static final String EDIT = "/incidencia/edit"+"/{id}";
+	public static final String UPDATE = "/incidencia/update";
 	
 	
 	
@@ -88,6 +91,24 @@ public class IncidenciaController {
 		incidenciaService.delete(Long.parseLong(id));
 		
 		return list();
+	}
+	
+	@RequestMapping(VIEW)
+	public ModelAndView view(@PathVariable("id") String id ) {
+		
+		logger.info(VIEW);		
+		
+		Incidencia incidencia = incidenciaService.get(Long.parseLong(id));
+		
+		ModelAndView model = new ModelAndView();
+		model.addObject("incidencia", incidencia);
+		
+		model.addObject("estados", Constant.estados);
+		
+		model.setViewName("incidencia/view");
+		
+		
+		return model;
 	}
 	
 	
