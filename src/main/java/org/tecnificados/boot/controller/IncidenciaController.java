@@ -9,9 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.tecnificados.boot.Constant;
 import org.tecnificados.boot.model.Incidencia;
@@ -30,6 +29,9 @@ public class IncidenciaController {
 	public static final String LIST = "/incidencia/list";
 	public static final String ADD = "/incidencia/add";
 	public static final String SAVE = "/incidencia/save";
+	public static final String REMOVE = "/incidencia/remove"+"/{id}";
+	
+	
 	
 	
 	@Autowired
@@ -77,6 +79,17 @@ public class IncidenciaController {
 
 		return list();
 	}
+	
+	@RequestMapping(REMOVE)
+	public ModelAndView remove(@PathVariable("id") String id ) {
+		
+		logger.info(REMOVE);		
+		
+		incidenciaService.delete(Long.parseLong(id));
+		
+		return list();
+	}
+	
 	
 	
 	
